@@ -5,7 +5,14 @@ import './App.css'
 
 function App() {
 
-const [products, setProducts] = useState([])
+interface IProducts {
+    name: string,
+    image: string,
+    ingredients: string[],
+    description: string
+  }
+  
+const [products, setProducts] = useState<IProducts[]>([])
 
 useEffect(() => {
   loadProducts()
@@ -18,7 +25,7 @@ async function loadProducts(){
   setProducts(resJson)
 }
 
-async function onChange(fieldName: string, value: string, productIndex: number) {
+async function onChange(fieldName: 'name' | 'description' | 'image', value: string, productIndex: number) {
   let newProducts = [...products]
   newProducts[productIndex][fieldName] = value
   setProducts(newProducts)
